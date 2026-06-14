@@ -33,6 +33,8 @@ services:
       - "8080:8080"
     env_file:
       - .env
+    environment:
+      SONG_SERVICE_URL: ${SONG_SERVICE_URL}
     depends_on:
       - resource-db
       - song-service
