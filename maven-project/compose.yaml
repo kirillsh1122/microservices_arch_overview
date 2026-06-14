@@ -39,7 +39,7 @@ services:
 
   song-service:
     build:
-      context: ./song-service
+      context: .
       dockerfile: ./song-service/Dockerfile
     ports:
       - "8081:8081"
