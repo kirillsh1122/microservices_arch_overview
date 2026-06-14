@@ -3,7 +3,7 @@ WORKDIR /app
 COPY pom.xml .
 COPY resource-service/pom.xml resource-service/pom.xml
 RUN mvn -f resource-service/pom.xml dependency:go-offline
-COPY src ./src
+COPY resource-service/src resource-service/src
 RUN mvn -f resource-service/pom.xml clean package
 
 FROM eclipse-temurin:21-jre-alpine-3.23
