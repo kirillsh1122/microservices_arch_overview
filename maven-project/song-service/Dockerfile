@@ -8,6 +8,6 @@ RUN mvn -f song-service/pom.xml clean package
 
 FROM eclipse-temurin:21-jre-alpine-3.23
 WORKDIR /song-service
-COPY --from=build /song-service/target/*.jar song-service.jar
-EXPOSE 8080
+COPY --from=build app/song-service/target/*.jar song-service.jar
+EXPOSE 8081
 CMD ["java", "-jar", "song-service.jar"]
