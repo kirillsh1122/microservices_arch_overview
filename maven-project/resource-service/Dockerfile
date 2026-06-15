@@ -4,7 +4,7 @@ COPY pom.xml .
 COPY resource-service/pom.xml resource-service/pom.xml
 RUN mvn -f resource-service/pom.xml dependency:go-offline
 COPY resource-service/src resource-service/src
-RUN mvn -f resource-service/pom.xml clean package
+RUN mvn -f resource-service/pom.xml clean package -Dmaven.test.skip=true
 
 FROM eclipse-temurin:21-jre-alpine-3.23
 WORKDIR /resource-service

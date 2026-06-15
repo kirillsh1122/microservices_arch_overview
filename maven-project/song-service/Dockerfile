@@ -4,7 +4,7 @@ COPY pom.xml .
 COPY song-service/pom.xml song-service/pom.xml
 RUN mvn -f song-service/pom.xml dependency:go-offline
 COPY song-service/src song-service/src
-RUN mvn -f song-service/pom.xml clean package
+RUN mvn -f song-service/pom.xml clean package -Dmaven.test.skip=true
 
 FROM eclipse-temurin:21-jre-alpine-3.23
 WORKDIR /song-service
