@@ -13,7 +13,7 @@ import com.microservice.architecture.overview.resource_service.dto.SongIdRespons
 import com.microservice.architecture.overview.resource_service.dto.DeleteResponse;
 
 
-@FeignClient(name = "song-service", url = "${song.service.url}")
+@FeignClient(name = "song-service")
 public interface SongServiceClient {
 
     @PostMapping("/songs")

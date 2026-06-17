@@ -1,16 +1,13 @@
 package com.microservice.architecture.overview.resource_service.exception.handler;
 
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
-import org.springframework.http.HttpStatusCode;
 
 import com.microservice.architecture.overview.resource_service.exception.ResourceNotFoundException;
 import com.microservice.architecture.overview.resource_service.exception.InvalidIdException;
@@ -38,8 +35,10 @@ public class ResourceServiceGlobalExceptionHandler extends ResponseEntityExcepti
             HttpStatusCode status,
             WebRequest request) {
 
-        String mediaType = ex.getContentType() != null
-                ? ex.getContentType().toString()
+        MediaType contentType = ex.getContentType();
+
+        String mediaType = contentType != null
+                ? contentType.getType() + "/" + contentType.getSubtype()
                 : "unknown";
 
         ErrorResponse error = new ErrorResponse(
