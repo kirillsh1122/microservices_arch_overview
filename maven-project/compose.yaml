@@ -33,19 +33,41 @@ services:
       - "8080:8080"
     env_file:
       - .env
-    environment:
-      SONG_SERVICE_URL: ${SONG_SERVICE_URL}
     depends_on:
       - resource-db
       - song-service
+      - eureka-server
 
   song-service:
     build:
       context: .
       dockerfile: ./song-service/Dockerfile
     ports:
-      - "8081:8081"
+      - "8081-8082:8081"
     env_file:
       - .env
     depends_on:
       - song-db
+      - eureka-server
+
+  eureka-server:
+    build:
+      context: .
+      dockerfile: ./eureka-server/Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "8761:8761"
+
+  gateway-service:
+    build:
+      context: .
+      dockerfile: ./gateway-service/Dockerfile
+    ports:
+      - "8085:8085"
+    env_file:
+      - .env
+    depends_on:
+      - eureka-server
+      - resource-service
+      - song-service
